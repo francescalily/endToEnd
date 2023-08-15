@@ -1,7 +1,7 @@
 const db = require('../database/connect');
 
 class Bug {
-    constructor(bug_id, name, continent, image_url, genus, ecology, description) {
+    constructor({ bug_id, name, continent, image_url, genus, ecology, description }) {
         this.bug_id = bug_id;
         this.name = name;
         this.continent = continent;

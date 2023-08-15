@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #ecc95f;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+#left-container {
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#right-container {
+    height: 60%;
+}
+
+#logo {
+    margin: 10px 0;
+    height: 10%;
+    position: absolute;
+    bottom: 5%;
+}
+
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+}
+
+#login-wrapper {
+    /* background-color: #be9c46; */
+    /* padding: 5%; */
+
+    /* margin-bottom: 10%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    height: 100%;
+
+}
+
+#tab {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.tabs {
+    width: 50%;
+    height: 60px;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.15em;
+    border-bottom: solid 5px #ecc95f;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.tab-selected {
+    border-bottom: solid 5px #be9c46;
+}
+
+.form > h1 {
+    color: #fff;
+}
+
+fieldset {
+    outline: none;
+    border: none;
+}
+
+fieldset > input {
+    margin: 5px 0;
+}
+
+.inputs {
+    outline: none;
+    width: 100%;
+    height: 30px;
+    border: solid 3px #ecc95f;
+    font-size: 1.0em;
+}
+
+.inputs:focus {
+    border: solid 3px #be9c46;
+}
+
+#username {
+
+}
+
+.form-button {
+    margin: 10px 0;
+    height: 40px;
+    width: 50%;
+    background-color: #be9c46;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.0em;
+}
+
+.form-button:hover {
+    margin: 10px 0;
+    height: 40px;
+    width: 50%;
+    background-color: #a18337;
+}
+
+.filler {
+    margin: auto;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin: 10px 0 10% 0;
+}
+
+.hide {
+    display: none;
+}
+
+
+
+
+
+

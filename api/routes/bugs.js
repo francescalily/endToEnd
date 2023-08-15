@@ -4,6 +4,6 @@ const authenticator = require('../middleware/authenticator.js');
 
 const bugsRouter = Router();
 
-bugsRouter.post("/", authenticator, bugsController.showAll);
+bugsRouter.get("/", bugsController.showAll);
 
 module.exports = bugsRouter;

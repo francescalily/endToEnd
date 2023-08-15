@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/styles.css" >
+    <script defer src="./assets/login.js"></script>
+    <title>What's Bugging You? | Login</title>
+</head>
+<body>
+        <main>
+            <div id="login-wrapper">
+                <div id="tab">
+                    <button id="login-tab" class="tabs tab-selected">Login</button>
+                    <button id="register-tab" class="tabs">Register</button>
+                </div>
+                <form id="login-form" class="form flex-display">
+                    <h1>Login</h1>
+                    <fieldset>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" class="inputs" name="username">
+                    </fieldset>
+                    <fieldset>
+                        <label for="password">Password</label>
+                        <input type="text" id="password" class="inputs" name="password">
+                    </fieldset>
+                    <input type="submit" id="login-btn" class="form-button" value="Login">
+                    
+                </form>
+
+                <form id="register-form" class="form flex-display hide">
+                    <h1>Register</h1>
+                    <fieldset>
+                        <label for="username">Username</label>
+                        <input type="text" id="rregister-username" class="inputs" name="register-username">
+                    </fieldset>
+                    <fieldset>
+                        <label for="password">Password</label>
+                        <input type="text" id="register-password" class="inputs" name="register-password">
+                    </fieldset>
+                    <input type="submit" id="register-btn" class="form-button" value="Register">
+                    
+                </form>
+                
+                <img src="./assets/bug_logo.png" id="logo"></img>
+            </div>
+        </main>
+    
+</body>
+</html>

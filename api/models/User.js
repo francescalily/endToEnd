@@ -8,9 +8,8 @@ class User {
         this.is_admin = is_admin;
     }
 
-
     static async create(user) {
-        
+
     }
 
     static async getOneById(id) {
