@@ -22,16 +22,18 @@ CREATE TABLE bug (
     bug_id INT GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(30) NOT NULL,
     continent VARCHAR(30) NOT NULL,
-    image_url VARCHAR(150),
+    image_url VARCHAR(300),
     genus VARCHAR(40) NOT NULL,
     ecology VARCHAR(256),
     description VARCHAR(256),
     PRIMARY KEY (bug_id)
 );
 
--- INSERT INTO bug (name, continent, image_url, genus, ecology, description)
--- VALUES
--- ('Grasshopper', 'All but Antartica', 'https://cdn.forumcomm.com/dims4/default/93e3950/2147483647/strip/false/crop/2121x1414+0+0/resize/1486x991!/quality/90/?url=https%3A%2F%2Ffcc-cue-exports-brightspot.s3.us-west-2.amazonaws.com%2Fgrandforksherald%2Fbinary%2Fgrasshopper_binary_2759443.jpg', 'suborder Caelifera', 'herbivore', 'bug description');
+INSERT INTO bug (name, continent, image_url, genus, ecology, description)
+VALUES
+('Grasshopper', 'All but Antartica', 'https://upload.wikimedia.org/wikipedia/commons/3/38/Grasshopper_at_MGSP.jpg', 'suborder Caelifera', 'herbivore', '
+A grasshopper is a jumping insect that feeds on plants.'),
+('Bee', 'All but Antartica', 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Apis_mellifera_Western_honey_bee.jp30', 'Apis', '-', 'A bee is a flying insect known for pollination and producing honey.');
  
 
 --INSERT INTO user_account (username, password, is_admin) VALUES ('admin', 'Password1', true);
