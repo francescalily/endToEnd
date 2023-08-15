@@ -3,7 +3,7 @@ const Bugs = require("../models/Bug");
 async function showAll(req, res) {
   try {
     const allBugs = await Bugs.readAll();
-    res.status(200).send(`allBugs`);
+    res.status(200).send(allBugs);
   } catch (err) {
     res.status(400).json({ err: err.message });
   }
