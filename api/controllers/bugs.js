@@ -1,21 +1,12 @@
 const Bugs = require("../models/Bug");
 
 async function showAll(req, res) {
-<<<<<<< HEAD
-    try {
-        console.log('Show Bugs');
-        res.status(200).send(`You're in!`);
-    } catch (err) {
-        res.status(400).json({ err: err.message });
-    }
-=======
   try {
     const allBugs = await Bugs.readAll();
     res.status(200).send(allBugs);
   } catch (err) {
     res.status(400).json({ err: err.message });
   }
->>>>>>> 614f32551fe60307fb13cd33a9478995f299dbeb
 }
 
 async function create(req, res) {

@@ -3,8 +3,6 @@ const registerTabButton = document.querySelector('#register-tab');
 const loginForm = document.querySelector('#login-form');
 const registerForm = document.querySelector('#register-form');
 
-
-
 loginTabButton.addEventListener('click', function(e) {
     e.preventDefault();
 
@@ -75,7 +73,8 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
     const data = await response.json();
 
     if (response.status == 201) {
-        window.location.assign("login.html");
+        //window.location.assign("login.html");
+        loginTabButton.click();
     } else {
         alert(data.error);
     }

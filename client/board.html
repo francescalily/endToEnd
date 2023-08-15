@@ -4,10 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/styles.css" >
-    <script defer src="./assets/register.js"></script>
+    <script defer src="./assets/board.js"></script>
     <title>What's Bugging You? | Board</title>
 </head>
 <body>
-    
+    <main>
+        <div id="board-wrapper">
+            <div id="tab">
+                <button id="list-all-limit-tab" class="tabs tab-selected">List all (Limit)</button>
+                <button id="list-by-name-tab" class="tabs">List by Name</button>
+                <button id="list-by-id-tab" class="tabs">List by ID</button>
+            </div>
+            <form id="list-all-limit-form" class="form flex-display">
+                <h1>List all (Limit)</h1>
+                <fieldset>
+                    <label for="list-all-limit-id">ID</label>
+                    <input type="text" id="list-all-limit-id" class="inputs" name="list-all-limit-id">
+                </fieldset>
+                <fieldset>
+                    <label for="list-all-limit-limit">Limit</label>
+                    <input type="list-all-limit-limit" id="list-all-limit-limit" class="inputs" name="list-all-limit-limit">
+                </fieldset>
+                <input type="submit" id="list-all-limit-button" class="form-button" value="Fetch">
+            </form>
+
+            <form id="list-by-name-form" class="form flex-display hide">
+                <h1>List all (Limit)</h1>
+                <fieldset>
+                    <label for="list-by-name-id">Name</label>
+                    <input type="text" id="list-by-name-name" class="inputs" name="list-by-name-name">
+                </fieldset>
+                <input type="submit" id="list-by-name-button" class="form-button" value="Fetch">
+            </form>
+
+            <form id="list-by-id-form" class="form flex-display hide">
+                <h1>List all (Limit)</h1>
+                <fieldset>
+                    <label for="list-by-id-id">ID</label>
+                    <input type="text" id="list-by-id-id" class="inputs" name="list-by-id-id">
+                </fieldset>
+                <input type="submit" id="list-by-id-button" class="form-button" value="Fetch">
+            </form>
+            
+            <img src="./assets/bug_logo.png" id="logo"></img>
+        </div>
+    </main>
 </body>
 </html>

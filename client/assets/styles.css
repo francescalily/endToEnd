@@ -58,6 +58,20 @@ main {
 
 }
 
+#board-wrapper {
+    /* background-color: #be9c46; */
+    /* padding: 5%; */
+
+    /* margin-bottom: 10%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 400px;
+    height: 100%;
+
+}
+
 #tab {
     display: flex;
     flex-direction: row;
@@ -88,6 +102,7 @@ main {
 fieldset {
     outline: none;
     border: none;
+    width: 85%;
 }
 
 fieldset > input {

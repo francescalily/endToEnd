@@ -2,9 +2,6 @@ DROP TABLE IF EXISTS bug;
 DROP TABLE IF EXISTS token;
 DROP TABLE IF EXISTS user_account;
 
-
-
-
 CREATE TABLE user_account (
     user_id INT GENERATED ALWAYS AS IDENTITY,
     username VARCHAR(30) UNIQUE NOT NULL,
@@ -34,5 +31,8 @@ CREATE TABLE bug (
 
 -- INSERT INTO bug (name, continent, image_url, genus, ecology, description)
 -- VALUES
---   ('Grasshopper', 'All but Antartica', 'https://cdn.forumcomm.com/dims4/default/93e3950/2147483647/strip/false/crop/2121x1414+0+0/resize/1486x991!/quality/90/?url=https%3A%2F%2Ffcc-cue-exports-brightspot.s3.us-west-2.amazonaws.com%2Fgrandforksherald%2Fbinary%2Fgrasshopper_binary_2759443.jpg', 'suborder Caelifera', 'herbivore', 'bug description');
+-- ('Grasshopper', 'All but Antartica', 'https://cdn.forumcomm.com/dims4/default/93e3950/2147483647/strip/false/crop/2121x1414+0+0/resize/1486x991!/quality/90/?url=https%3A%2F%2Ffcc-cue-exports-brightspot.s3.us-west-2.amazonaws.com%2Fgrandforksherald%2Fbinary%2Fgrasshopper_binary_2759443.jpg', 'suborder Caelifera', 'herbivore', 'bug description');
  
+
+--INSERT INTO user_account (username, password, is_admin) VALUES ('admin', 'Password1', true);
+--INSERT INTO user_account (username, password) VALUES ('user', 'Password1');
