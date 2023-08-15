@@ -17,9 +17,10 @@ async function register(req, res) {
 
 async function login(req, res) {
     const data = req.body;
+    console.log(data);
     try {
         const user = await User.getOneByUsername(data.username);
-        // console.log("User", user);
+        console.log("User", user);
         const authenticated = await bcrypt.compare(data.password, user["password"]);
         console.log("Authenticated", authenticated);
     
@@ -45,8 +46,6 @@ async function logout(req, res) {
         if (response == data.token) {
             res.status(200).json({ logged_out: true });
         }
-
-        res.send(200).send('Login Completed!');
     } catch (err) {
         res.status(403).json({ err: err.message });
     }

@@ -35,6 +35,7 @@ class User {
       "SELECT * FROM user_account WHERE username = $1",
       [username]
     );
+
     if (response.rows.length != 1) {
       throw new Error("Unable to locate user.");
     }

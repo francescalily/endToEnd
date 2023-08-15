@@ -5,49 +5,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/styles.css" >
     <script defer src="./assets/board.js"></script>
+    <script defer src="./assets/logout.js"></script>
     <title>What's Bugging You? | Board</title>
 </head>
 <body>
+    <nav><a id="logout-button" src="#">Logout</a></nav>
     <main>
-        <div id="board-wrapper">
-            <div id="tab">
-                <button id="list-all-limit-tab" class="tabs tab-selected">List all (Limit)</button>
-                <button id="list-by-name-tab" class="tabs">List by Name</button>
-                <button id="list-by-id-tab" class="tabs">List by ID</button>
+        <div id="content-wrapper">
+            <div id="board-wrapper">
+                <div id="tab">
+                    <button id="list-all-limit-tab" class="tabs tab-selected">Bug Posts</button>
+                    <button id="list-by-name-tab" class="tabs">List by Name</button>
+                    <button id="list-by-id-tab" class="tabs">List by ID</button>
+                </div>
+                <form id="list-all-limit-form" class="form flex-display">
+                    <h1>Bug Posts</h1>
+                    <div class="horizontal-wrapper form-input-margin">
+                    <fieldset>
+                        <label for="bug-posts-name">Name</label>
+                        <input type="text" id="bug-posts-name" class="inputs" name="bug-posts-name">
+                    </fieldset>
+                    <fieldset>
+                        <label for="bug-posts-genus">Genus</label>
+                        <input type="text" id="bug-posts-genus" class="inputs" name="bug-posts-genus">
+                    </fieldset>
+                    <fieldset>
+                        <label for="bug-posts-continent">Continent</label>
+                        <input type="text" id="bug-posts-continent" class="inputs" name="bug-posts-continent">
+                    </fieldset>
+                    </div>
+                    <fieldset>
+                        <label for="bug-posts-image-url">Image URL</label>
+                        <input type="text" id="bug-posts-image-url" class="inputs" name="bug-posts-image-url">
+                    </fieldset>
+                    <fieldset>
+                        <label for="bug-posts-ecology">Ecology</label>
+                        <input type="text" id="bug-posts-ecology" class="inputs" name="bug-posts-ecology">
+                    </fieldset>
+                    <fieldset>
+                        <label for="bug-posts-description">Description</label>
+                        <input type="text" id="bug-posts-description" class="inputs" name="bug-posts-description">
+                    </fieldset>
+                    <input type="submit" id="list-all-limit-button" class="form-button board-button-vertical" value="Add">
+                </form>
+
+                <form id="list-by-name-form" class="form flex-display hide">
+                    <h1>List by Name</h1>
+                    <div class="horizontal-wrapper">
+                    <fieldset>
+                        <label for="list-by-name-id">Name</label>
+                        <input type="text" id="list-by-name-name" class="inputs" name="list-by-name-name">
+                    </fieldset>
+                    <input type="submit" id="list-by-name-button" class="form-button board-button-horizontal" value="Fetch">
+                    </div>
+                </form>
+
+                <form id="list-by-id-form" class="form flex-display hide">
+                    <h1>List by ID</h1>
+                    <div class="horizontal-wrapper">
+                    <fieldset>
+                        <label for="list-by-id-id">ID</label>
+                        <input type="text" id="list-by-id-id" class="inputs" name="list-by-id-id">
+                    </fieldset>
+                    <input type="submit" id="list-by-id-button" class="form-button board-button-horizontal" value="Fetch">
+                    </div>
+                </form>
+                
+                
             </div>
-            <form id="list-all-limit-form" class="form flex-display">
-                <h1>List all (Limit)</h1>
-                <fieldset>
-                    <label for="list-all-limit-id">ID</label>
-                    <input type="text" id="list-all-limit-id" class="inputs" name="list-all-limit-id">
-                </fieldset>
-                <fieldset>
-                    <label for="list-all-limit-limit">Limit</label>
-                    <input type="list-all-limit-limit" id="list-all-limit-limit" class="inputs" name="list-all-limit-limit">
-                </fieldset>
-                <input type="submit" id="list-all-limit-button" class="form-button" value="Fetch">
-            </form>
-
-            <form id="list-by-name-form" class="form flex-display hide">
-                <h1>List all (Limit)</h1>
-                <fieldset>
-                    <label for="list-by-name-id">Name</label>
-                    <input type="text" id="list-by-name-name" class="inputs" name="list-by-name-name">
-                </fieldset>
-                <input type="submit" id="list-by-name-button" class="form-button" value="Fetch">
-            </form>
-
-            <form id="list-by-id-form" class="form flex-display hide">
-                <h1>List all (Limit)</h1>
-                <fieldset>
-                    <label for="list-by-id-id">ID</label>
-                    <input type="text" id="list-by-id-id" class="inputs" name="list-by-id-id">
-                </fieldset>
-                <input type="submit" id="list-by-id-button" class="form-button" value="Fetch">
-            </form>
             
-            <img src="./assets/bug_logo.png" id="logo"></img>
+            <div id="post-list" class="list-wrapper default-scroll">
+                <form class="post">
+                    <div class="horizontal-wrapper post-wrapper">
+                        <img class="post-image" src="#" />
+                        <textarea class="post-image-text-area hide">somethingoranother
+                        </textarea>
+                        <div class="post-header-wrapper">
+                            <input type="text" class="post-header" disabled name="post-input-name" value="Name">
+                            <input type="text" class="post-header" disabled name="post-input-genus" value="Genus">
+                            <input type="text" class="post-header" disabled name="post-input-continent" value="Continent">
+                        </div>
+                    </div>
+                    
+                    <textarea class="post-ecology post-text-area" disabled>Ecology</textarea>
+                    <textarea class="post-description post-text-area" disabled>Description</textarea>
+                    <div class="filler"></div>
+                    <div class="post-footer-bar">
+                        <div class="post-update-buttons hide">
+                            <a class="post-save-button post-footer-button" href="#">Save</a>
+                            <a class="post-cancel-button post-footer-button" href="#">Cancel</a>
+                        </div>
+                        <a class="post-edit-button post-footer-button" href="#">Edit</a>
+                        <a class="post-delete-button post-footer-button" href="#">Delete</a>
+                    </div>
+                </form>
+
+                
+
         </div>
+        <div class="footer-filler">
+            
+        </div>
+        <img src="./assets/bug_logo.png" id="logo"></img>
     </main>
 </body>
 </html>
