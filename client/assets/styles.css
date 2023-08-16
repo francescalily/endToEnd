@@ -125,10 +125,6 @@ fieldset > input {
     border: solid 3px #be9c46;
 }
 
-#username {
-
-}
-
 .form-button {
     margin: 10px 0;
     height: 40px;
@@ -319,6 +315,28 @@ label {
     border-radius: 5px;
 }
 
+/*
+.post-input:-webkit-autofill,
+.post-input:-webkit-autofill:hover,
+.post-input:-webkit-autofill:focus,
+.post-input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
+    appearance: textfield; 
+}
+*/
+
+.post-input {
+    background-color: white !important;
+}
+
+.post-input:disabled {
+    background-color: transparent !important;
+    appearance: none;
+}
+
+
 textarea {
     resize: none;
     font-size: 1.15rem;
@@ -326,7 +344,7 @@ textarea {
 }
 
 textarea:disabled {
-    background-color: transparent;
+    background-color: transparent !important;
     outline: none;
     border: none;
 }
@@ -335,9 +353,15 @@ textarea:disabled {
     height: 50%;
 }
 
+input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    transition: background-color 0s 600000s, color 0s 600000s;
+  }
+
 .hide {
     display: none;
 }
+
 
 
 

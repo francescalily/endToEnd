@@ -7,6 +7,7 @@ const listByIdForm = document.querySelector('#list-by-id-form');
 const postList = document.querySelector('#post-list');
 
 class Bug {
+
     constructor({bug_id, name, continent, image_url, genus, ecology, description}) {
         console.log(name);
         this.bug_id = bug_id;
@@ -52,9 +53,7 @@ async function updatePostByID(form, bug) {
     //     description: bug.getDescription
     // });
     
-    console.log(form.elements);
-    console.log(form.querySelector('.post-image'));
-    console.log(form.elements['post-image-text-area']);
+    // console.log(form.elements);
 
     const options = {
         method: "PATCH",
@@ -83,7 +82,7 @@ async function updatePostByID(form, bug) {
             // form.elements['post-text-area-ecology'].value = ecology;
             // form.elements['post-text-area-description'].value = description;
             form.querySelector('.post-image').src = bug.getImageURL;
-            console.log('Saved Successfully');
+            // console.log('Saved Successfully');
             isEditing = false;
         } else {
             form.elements['post-input-name'].value = editBugSnapshot['name'];
@@ -92,7 +91,7 @@ async function updatePostByID(form, bug) {
             form.elements['post-text-area-ecology'].value = editBugSnapshot['ecology'];
             form.elements['post-text-area-description'].value = editBugSnapshot['description'];
             // form.elements['post-image'].src = image_url;
-            console.log('Failed to save');
+            // console.log('Failed to save');
             isEditing = false;
         }
     } catch (error) {
@@ -101,8 +100,8 @@ async function updatePostByID(form, bug) {
         form.elements['post-input-continent'].value = editBugSnapshot['continent'];
         form.elements['post-text-area-ecology'].value = editBugSnapshot['ecology'];
         form.elements['post-text-area-description'].value = editBugSnapshot['description'];
-        console.log('Error has occurred');
-        console.log(error);
+        // console.log('Error has occurred');
+        // console.log(error);
         isEditing = false;
     }
     
@@ -164,46 +163,59 @@ function createPost(post) {
 
     const postImageTextArea = document.createElement("textarea");
     postImageTextArea.classList.add('post-image-text-area');
+    postImageTextArea.classList.add('post-input');
     postImageTextArea.classList.add('hide');
     postImageTextArea.name = "post-image-text-area";
+    postImageTextArea.autocomplete = "off";
     postImageTextArea.value = image_url;
+    
 
     const headerWrapper = document.createElement("div");
     headerWrapper.classList.add('post-header-wrapper');
 
     const postInputName = document.createElement("input");
     postInputName.classList.add('post-header');
+    postInputName.classList.add('post-input');
     postInputName.name = "post-input-name";
     postInputName.type = "text";
     postInputName.disabled = true;
+    postInputName.autocomplete = "off";
     postInputName.value = name;
 
     const postInputGenus = document.createElement("input");
     postInputGenus.classList.add('post-header');
+    postInputGenus.classList.add('post-input');
     postInputGenus.name = "post-input-genus";
     postInputGenus.type = "text";
     postInputGenus.disabled = true;
+    postInputGenus.autocomplete = "off";
     postInputGenus.value = genus;
 
     const postInputContinent = document.createElement("input");
     postInputContinent.classList.add('post-header');
+    postInputContinent.classList.add('post-input');
     postInputContinent.name = "post-input-continent";
     postInputContinent.type = "text";
     postInputContinent.disabled = true;
+    postInputContinent.autocomplete = "off";
     postInputContinent.value = continent;
 
     const postEcologyTextArea = document.createElement("textarea");
     postEcologyTextArea.classList.add('post-ecology');
     postEcologyTextArea.classList.add('post-text-area');
+    postEcologyTextArea.classList.add('post-input');
     postEcologyTextArea.name = "post-text-area-ecology";
     postEcologyTextArea.disabled = true;
+    postEcologyTextArea.autocomplete = "off";
     postEcologyTextArea.value = ecology;
 
     const postDescriptionTextArea = document.createElement("textarea");
     postDescriptionTextArea.classList.add('post-description');
     postDescriptionTextArea.classList.add('post-text-area');
+    postDescriptionTextArea.classList.add('post-input');
     postDescriptionTextArea.name = "post-text-area-description";
     postDescriptionTextArea.disabled = true;
+    postDescriptionTextArea.autocomplete = "off";
     postDescriptionTextArea.value = description;
 
     const postFooter = document.createElement("div");
@@ -263,7 +275,7 @@ function createPost(post) {
     postEditButton.addEventListener('click', (e) => {
         e.preventDefault();
         if (!isEditing) {
-            console.log(post);
+            // console.log(post);
             editBugSnapshot = new Bug(post);
             // console.log(editBugSnapshot);
             isEditing = true;
@@ -288,8 +300,15 @@ function createPost(post) {
         postForm.elements['post-input-continent'].value = editBugSnapshot['continent'];
         postForm.elements['post-text-area-ecology'].value = editBugSnapshot['ecology'];
         postForm.elements['post-text-area-description'].value = editBugSnapshot['description'];
+       
+        // postForm.elements['post-input-name'].removeAllRanges();
+        // postForm.elements['post-input-genus'].removeAllRanges();
+        // postForm.elements['post-input-continent'].removeAllRanges();
+        // postForm.elements['post-text-area-ecology'].removeAllRanges();
+        // postForm.elements['post-text-area-description'].removeAllRanges();
 
         postImageTextArea.classList.add('hide');
+
         postInputName.disabled = true;
         postInputGenus.disabled = true;
         postInputContinent.disabled = true;
@@ -308,7 +327,7 @@ function createPost(post) {
         let inputGenus = postInputGenus.value;
         let inputEcology = postEcologyTextArea.value;
         let inputDescription = postDescriptionTextArea.value;
-        console.log(inputName);
+        // console.log(inputName);
         // console.log(inputContinent);
         // console.log(inputImageURL);
         // console.log(inputGenus);
@@ -364,7 +383,7 @@ async function loadPosts () {
 }
 
 async function deletePost(form, bug_id) {
-    console.log(bug_id);
+    // console.log(bug_id);
     
     const options = {
         method: "DELETE",
@@ -410,17 +429,17 @@ addBugPostForm.addEventListener("submit", async (e) => {
             description: form.get("add-bug-posts-description")
         })
     }
-
+    console.log();
     const response = await fetch("http://localhost:3000/bugs/", options);
     const data = await response.json();
 
     if (response.status == 201) {
-        form.get("add-bug-posts-name").value = "";
-        form.get("add-bug-posts-continent").value = "";
-        form.get("add-bug-posts-image-url").value = "";
-        form.get("add-bug-posts-genus").value = "";
-        form.get("add-bug-posts-ecology").value = "";
-        form.get("add-bug-posts-description").value = "";
+        e.target.elements['add-bug-posts-name'].value = "";
+        e.target.elements['add-bug-posts-continent'].value = "";
+        e.target.elements['add-bug-posts-image-url'].value = "";
+        e.target.elements['add-bug-posts-genus'].value = "";
+        e.target.elements['add-bug-posts-ecology'].value = "";
+        e.target.elements['add-bug-posts-description'].value = "";
         loadPosts();
 
     } else {
@@ -430,7 +449,5 @@ addBugPostForm.addEventListener("submit", async (e) => {
 
 // console.log(addBugPostForm);
 loadPosts();
-
 // displayPost({bug_id: 1, name: "Bug", continent: "Africa", image_url: "#", genus: "Of Bug Genus", ecology: "A paragraph on Ecology", description: "A paragraph about the description"});
 // displayPost({bug_id: 2, name: "Bug", continent: "Africa", image_url: "#", genus: "Of Bug Genus", ecology: "A paragraph on Ecology", description: "A paragraph about the description"});
-
