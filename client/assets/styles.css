@@ -305,11 +305,6 @@ label {
     padding: 0 6%;
 }
 
-.default-scroll {
-    /* background-color: bisque; */
-    
-}
-
 .default-scroll::-webkit-scrollbar-thumb {
     background-color:#be9c46;
     /* border-radius: 5px; */

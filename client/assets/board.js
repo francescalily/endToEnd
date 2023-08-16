@@ -1,5 +1,5 @@
-const listAllLimitTabButton = document.querySelector('#list-all-limit-tab');
-const listAllLimitForm = document.querySelector('#list-all-limit-form');
+const addBugPostTabButton = document.querySelector('#add-bug-post-tab');
+const addBugPostForm = document.querySelector('#add-bug-post-form');
 const listByNameTabButton = document.querySelector('#list-by-name-tab');
 const listByNameForm = document.querySelector('#list-by-name-form');
 const listByIdTabButton = document.querySelector('#list-by-id-tab');
@@ -7,7 +7,8 @@ const listByIdForm = document.querySelector('#list-by-id-form');
 const postList = document.querySelector('#post-list');
 
 class Bug {
-    constructor({ bug_id, name, continent, image_url, genus, ecology, description }) {
+    constructor({bug_id, name, continent, image_url, genus, ecology, description}) {
+        console.log(name);
         this.bug_id = bug_id;
         this.name = name;
         this.continent = continent;
@@ -17,41 +18,72 @@ class Bug {
         this.description = description;
     }
 
-
+    get getBugID() { return this.bug_id; }
+    get getName() { return this.name; }
+    get getContinent() { return this.continent; }
+    get getImageURL() { return this.image_url; }
+    get getGenus() { return this.genus; }
+    get getEcology() { return this.ecology; }
+    get getDescription() { return this.description; }
 }
 
 let editBugSnapshot = null;
 let isEditing = false;
 
-async function updatePostByID(form, post) {
-    const { id, name, continent, image_url, genus, ecology, description } = post;
+async function updatePostByID(form, bug) {
+    // const { bug_id, name, continent, image_url, genus, ecology, description } = bug;
+    // console.log(bug);
+    // console.log(editBugSnapshot['name']);
+    // console.log({
+    //     name: bug.getName,
+    //     continent: bug.getContinent,
+    //     image_url: bug.getImageURL,
+    //     genus: bug.getGenus,
+    //     ecology: bug.getEcology,
+    //     description: bug.getDescription
+    // });
+
+    // console.log({
+    //     name: bug['name'],
+    //     continent: bug.getContinent,
+    //     image_url: bug.getImageURL,
+    //     genus: bug.getGenus,
+    //     ecology: bug.getEcology,
+    //     description: bug.getDescription
+    // });
+    
+    console.log(form.elements);
+    console.log(form.querySelector('.post-image'));
+    console.log(form.elements['post-image-text-area']);
 
     const options = {
-        method: "UPDATE",
+        method: "PATCH",
         headers: {
+            'Authorization': localStorage.getItem("token"),
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name: name,
-            continent: continent,
-            image_url: image_url,
-            genus: genus,
-            ecology: ecology,
-            description: description
+            name: bug.getName,
+            continent: bug.getContinent,
+            image_url: bug.getImageURL,
+            genus: bug.getGenus,
+            ecology: bug.getEcology,
+            description: bug.getDescription
         })
     }
     try {
-        const response = await fetch(`http://localhost:3000/bugs/${id}`, options);
-        const data = await response.json();
+        const response = await fetch(`http://localhost:3000/bugs/${bug.getBugID}`, options);
+        // const data = await response.json();
 
-        if (response.status == 200) {
-            form.elements['post-input-name'].value = name;
-            form.elements['post-input-genus'].value = genus;
-            form.elements['post-input-continent'].value = continent;
-            form.elements['post-text-area-ecology'].value = ecology;
-            form.elements['post-text-area-description'].value = description;
-            form.elements['post-image'].src = image_url;
+        if (response.status == 204) {
+            // form.elements['post-input-name'].value = name;
+            // form.elements['post-input-genus'].value = genus;
+            // form.elements['post-input-continent'].value = continent;
+            // form.elements['post-text-area-ecology'].value = ecology;
+            // form.elements['post-text-area-description'].value = description;
+            form.querySelector('.post-image').src = bug.getImageURL;
+            console.log('Saved Successfully');
             isEditing = false;
         } else {
             form.elements['post-input-name'].value = editBugSnapshot['name'];
@@ -60,7 +92,7 @@ async function updatePostByID(form, post) {
             form.elements['post-text-area-ecology'].value = editBugSnapshot['ecology'];
             form.elements['post-text-area-description'].value = editBugSnapshot['description'];
             // form.elements['post-image'].src = image_url;
-            alert(data.error);
+            console.log('Failed to save');
             isEditing = false;
         }
     } catch (error) {
@@ -69,18 +101,21 @@ async function updatePostByID(form, post) {
         form.elements['post-input-continent'].value = editBugSnapshot['continent'];
         form.elements['post-text-area-ecology'].value = editBugSnapshot['ecology'];
         form.elements['post-text-area-description'].value = editBugSnapshot['description'];
+        console.log('Error has occurred');
+        console.log(error);
+        isEditing = false;
     }
     
 }
 
-listAllLimitTabButton.addEventListener('click', function(e) {
+addBugPostTabButton.addEventListener('click', function(e) {
     e.preventDefault();
 
-    listAllLimitTabButton.classList.add('tab-selected');
+    addBugPostTabButton.classList.add('tab-selected');
     listByIdTabButton.classList.remove('tab-selected');
     listByNameTabButton.classList.remove('tab-selected');
 
-    listAllLimitForm.classList.remove('hide');
+    addBugPostForm.classList.remove('hide');
     listByIdForm.classList.add('hide');
     listByNameForm.classList.add('hide');
 
@@ -89,11 +124,11 @@ listAllLimitTabButton.addEventListener('click', function(e) {
 listByNameTabButton.addEventListener('click', function(e) {
     e.preventDefault();
 
-    listAllLimitTabButton.classList.remove('tab-selected');
+    addBugPostTabButton.classList.remove('tab-selected');
     listByIdTabButton.classList.remove('tab-selected');
     listByNameTabButton.classList.add('tab-selected');
 
-    listAllLimitForm.classList.add('hide');
+    addBugPostForm.classList.add('hide');
     listByIdForm.classList.add('hide');
     listByNameForm.classList.remove('hide');
     
@@ -102,17 +137,17 @@ listByNameTabButton.addEventListener('click', function(e) {
 listByIdTabButton.addEventListener('click', function(e) {
     e.preventDefault();
 
-    listAllLimitTabButton.classList.remove('tab-selected');
+    addBugPostTabButton.classList.remove('tab-selected');
     listByIdTabButton.classList.add('tab-selected');
     listByNameTabButton.classList.remove('tab-selected');
 
-    listAllLimitForm.classList.add('hide');
+    addBugPostForm.classList.add('hide');
     listByIdForm.classList.remove('hide');
     listByNameForm.classList.add('hide');
     
 });
 
-function displayPost(post) {
+function createPost(post) {
     const { bug_id, name, continent, image_url, genus, ecology, description } = post;
 
     const postForm = document.createElement("form");
@@ -130,6 +165,7 @@ function displayPost(post) {
     const postImageTextArea = document.createElement("textarea");
     postImageTextArea.classList.add('post-image-text-area');
     postImageTextArea.classList.add('hide');
+    postImageTextArea.name = "post-image-text-area";
     postImageTextArea.value = image_url;
 
     const headerWrapper = document.createElement("div");
@@ -227,8 +263,9 @@ function displayPost(post) {
     postEditButton.addEventListener('click', (e) => {
         e.preventDefault();
         if (!isEditing) {
+            console.log(post);
             editBugSnapshot = new Bug(post);
-            console.log(editBugSnapshot);
+            // console.log(editBugSnapshot);
             isEditing = true;
 
             postImageTextArea.classList.remove('hide');
@@ -271,7 +308,16 @@ function displayPost(post) {
         let inputGenus = postInputGenus.value;
         let inputEcology = postEcologyTextArea.value;
         let inputDescription = postDescriptionTextArea.value;
-        updatePostByID(postForm, {bug_id, inputName, inputContinent, inputImageURL, inputGenus, inputEcology, inputDescription});
+        console.log(inputName);
+        // console.log(inputContinent);
+        // console.log(inputImageURL);
+        // console.log(inputGenus);
+        // console.log(inputEcology);
+        const tempBug = new Bug ({bug_id : bug_id, name: inputName, continent: inputContinent, image_url: inputImageURL, genus: inputGenus, ecology: inputEcology, description: inputDescription});
+        
+        updatePostByID(postForm, tempBug);
+
+        
         postImageTextArea.classList.add('hide');
         postInputName.disabled = true;
         postInputGenus.disabled = true;
@@ -281,13 +327,69 @@ function displayPost(post) {
         postUpdateButtons.classList.add('hide');
         postEditButton.classList.remove('hide');
         postDeleteButton.classList.remove('hide');
+        
     });
 
-    postList.appendChild(postForm);
+    postDeleteButton.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        deletePost(postForm, bug_id);
+    });
+
+    return postForm;
+    // postList.appendChild(postForm);
+}
+
+async function loadPosts () {
+
+    const options = {
+        headers: {
+            'Authorization': localStorage.getItem("token")
+        }
+    }
+    const response = await fetch("http://localhost:3000/bugs", options);
+
+    if (response.status == 200) {
+        const posts = await response.json();
+        postList.textContent = "";
+        posts.forEach(p => {
+            const elem = createPost(p);
+            
+            postList.appendChild(elem);
+        })
+    } else {
+        //window.location.assign("./index.html");
+    }
+
+}
+
+async function deletePost(form, bug_id) {
+    console.log(bug_id);
+    
+    const options = {
+        method: "DELETE",
+        headers: {
+            'Authorization': localStorage.getItem("token")
+        }
+    }
+    
+    
+    const response = await fetch(`http://localhost:3000/bugs/${bug_id}`, options);
+    const data = await response;
+
+    if (response.status == 200) {
+        form.remove();
+         
+        // localStorage.setItem("token", data.token);
+        // window.location.assign("index.html");
+    } else {
+        alert(response.status);
+    }
+
 }
 
 
-listAllLimitForm.addEventListener("submit", async (e) => {
+addBugPostForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const form = new FormData(e.target);
@@ -295,25 +397,40 @@ listAllLimitForm.addEventListener("submit", async (e) => {
     const options = {
         method: "POST",
         headers: {
+            'Authorization': localStorage.getItem("token"),
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            id: form.get("list-all-limit-id"),
-            limit: form.get("list-all-limit-limit")
+            name: form.get("add-bug-posts-name"),
+            continent: form.get("add-bug-posts-continent"),
+            image_url: form.get("add-bug-posts-image-url"),
+            genus: form.get("add-bug-posts-genus"),
+            ecology: form.get("add-bug-posts-ecology"),
+            description: form.get("add-bug-posts-description")
         })
     }
 
     const response = await fetch("http://localhost:3000/bugs/", options);
     const data = await response.json();
 
-    if (response.status == 200) {
-        
+    if (response.status == 201) {
+        form.get("add-bug-posts-name").value = "";
+        form.get("add-bug-posts-continent").value = "";
+        form.get("add-bug-posts-image-url").value = "";
+        form.get("add-bug-posts-genus").value = "";
+        form.get("add-bug-posts-ecology").value = "";
+        form.get("add-bug-posts-description").value = "";
+        loadPosts();
+
     } else {
         alert(data.error);
     }
 });
 
-displayPost({bug_id: 1, name: "Bug", continent: "Africa", image_url: "#", genus: "Of Bug Genus", ecology: "A paragraph on Ecology", description: "A paragraph about the description"});
-displayPost({bug_id: 2, name: "Bug", continent: "Africa", image_url: "#", genus: "Of Bug Genus", ecology: "A paragraph on Ecology", description: "A paragraph about the description"});
+// console.log(addBugPostForm);
+loadPosts();
+
+// displayPost({bug_id: 1, name: "Bug", continent: "Africa", image_url: "#", genus: "Of Bug Genus", ecology: "A paragraph on Ecology", description: "A paragraph about the description"});
+// displayPost({bug_id: 2, name: "Bug", continent: "Africa", image_url: "#", genus: "Of Bug Genus", ecology: "A paragraph on Ecology", description: "A paragraph about the description"});
 

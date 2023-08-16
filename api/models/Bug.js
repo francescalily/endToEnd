@@ -13,26 +13,43 @@ class Bug {
 
     static async create(bug) {
         const { name, continent, image_url, genus, ecology, description } = bug;
+        console.log(name);
         const response = await db.query(
-            "INSERT INTO bugs (name continent, image_url, genus, ecology, description) VALUES ($1, $2, $3, $4, $5, $6) RETURNING bug_id;",
+            "INSERT INTO bug (name, continent, image_url, genus, ecology, description) VALUES ($1, $2, $3, $4, $5, $6) RETURNING bug_id;",
             [name, continent, image_url, genus, ecology, description]);
-        return new Bug({ ...bug, bug_id: response.rows[0].bug_id });
+        console.log(response);
+        const newId = response.rows[0].bug_id;
+        console.log(newId);
+        const newBug = await Bug.getOneById(newId);
+        return newBug;
+    }
+
+    static async getOneById(id) {
+        const response = await db.query("SELECT * FROM bug WHERE bug_id = $1", [id]);
+        if (response.rows.length != 1) {
+            throw new Error("Unable to locate post.")
+        }
+        return new Bug(response.rows[0]);
     }
 
     static async readAll() {
-        const response = await db.query("SELECT * FROM bugs");
+        const response = await db.query("SELECT * FROM bug");
         return response.rows.map((row) => new Bug(row));
     }
 
     static async updateByID(id, bug) {
         const { name, continent, image_url, genus, ecology, description } = bug;
-        await db.query(
-            "UPDATE bugs SET name=$1, contient=$2, image_url=$3, genus=$4, ecology=$5, description=$6 WHERE bug_id=$7",
+        // console.log(bug);
+        console.log(name);
+        const response = await db.query(
+            "UPDATE bug SET name=$1, continent=$2, image_url=$3, genus=$4, ecology=$5, description=$6 WHERE bug_id=$7 RETURNING *",
             [name, continent, image_url, genus, ecology, description, id]);
+        
+        return response.rows[0];
     }
 
     static async deleteByID(id) {
-        await db.query("DELETE FROM bugs WHERE bug_id=$1", [id]);
+        await db.query("DELETE FROM bug WHERE bug_id=$1", [id]);
     }
 }
 

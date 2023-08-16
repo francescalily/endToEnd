@@ -2,7 +2,7 @@ document.getElementById("logout-button").addEventListener("click", async (e) => 
     e.preventDefault();
 
     const storedToken = localStorage.getItem("token");
-    console.log(storedToken);
+    // console.log(storedToken);
 
     const options = {
         method: "POST",

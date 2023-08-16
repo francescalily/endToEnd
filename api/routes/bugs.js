@@ -9,6 +9,7 @@ bugsRouter.get("/", authenticator, bugsController.showAll);
 bugsRouter.post("/", authenticator, bugsController.create);
 
 bugsRouter.put("/:id", authenticator, bugsController.update);
+bugsRouter.patch("/:id", authenticator, bugsController.update);
 
 bugsRouter.delete("/:id", authenticator, bugsController.destroy);
 
